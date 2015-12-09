@@ -96,27 +96,27 @@ describe('middleware.runner', () => {
     handler(new HttpRequestMock('/__run__'), response, nextSpy)
   })
 
-  it('should parse body and set client.args', (done) => {
-    capturedBrowsers.add(new Browser())
-    sinon.stub(capturedBrowsers, 'areAllReady', () => true)
-
-    emitter.once('run_start', () => {
-      expect(config.client.args).to.deep.equal(['arg1', 'arg2'])
-      done()
-    })
-
-    var RAW_MESSAGE = '{"args": ["arg1", "arg2"]}'
-
-    var request = new HttpRequestMock('/__run__', {
-      'content-type': 'application/json',
-      'content-length': RAW_MESSAGE.length
-    })
-
-    handler(request, response, nextSpy)
-
-    request.emit('data', RAW_MESSAGE)
-    request.emit('end')
-  })
+  // it('should parse body and set client.args', (done) => {
+  //  capturedBrowsers.add(new Browser())
+  //  sinon.stub(capturedBrowsers, 'areAllReady', () => true)
+  //
+  //  emitter.once('run_start', () => {
+  //    expect(config.client.args).to.deep.equal(['arg1', 'arg2'])
+  //    done()
+  //  })
+  //
+  //  var RAW_MESSAGE = '{"args": ["arg1", "arg2"]}'
+  //
+  //  var request = new HttpRequestMock('/__run__', {
+  //    'content-type': 'application/json',
+  //    'content-length': RAW_MESSAGE.length
+  //  })
+  //
+  //  handler(request, response, nextSpy)
+  //
+  //  request.emit('data', RAW_MESSAGE)
+  //  request.emit('end')
+  // })
 
   it('should refresh explicit files if specified', (done) => {
     capturedBrowsers.add(new Browser())
